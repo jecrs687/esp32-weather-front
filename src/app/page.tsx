@@ -23,6 +23,12 @@ export default function Home() {
       setData(await getData())
     }, 4000)
   }, [])
+
+  function wetValue(value){
+    if(value){
+      return value == 1? "Sim": "Não"
+    }
+  }
   
   return (
     <div className={styles.container}>
@@ -34,11 +40,12 @@ export default function Home() {
         </div>
         <div className={styles.dataPoint}>
           <span className={styles.icon}>💧</span>
-          <span className={styles.data}>Humidade: {data.humidate}%</span>
+          <span className={styles.data}>Umidade: {data.humidate}%</span>
         </div>
         <div className={styles.dataPoint}>
           <span className={styles.icon}>🌧️</span>
-          <span className={styles.data}>Molhado: {data.molhado == 1? "Sim": "Não"}</span>
+          <span className={styles.data}>Molhado: {wetValue(data.molhado)}
+          </span>
         </div>
       </div>
     </div>
