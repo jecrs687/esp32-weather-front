@@ -24,7 +24,7 @@ export default function Home() {
     }, 4000)
   }, [])
 
-  function wetValue(value){
+  function wetValue(value: number){
     if(value){
       return value == 1? "Sim": "Não"
     }
