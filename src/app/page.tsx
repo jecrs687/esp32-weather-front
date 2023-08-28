@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-async-client-component */
 'use client';
+import LoadingSpinner from './public/spinner';
 import styles from './wheater.module.css'
 import { useEffect, useState } from 'react'
 
@@ -17,10 +18,12 @@ async function getData() {
 
 export default function Home() {
   const [ data, setData ] = useState({} as Data)
+  const [ loading, setLoading ] = useState(true)
   
   useEffect(() => {
     setInterval(async () => {
       setData(await getData())
+      if(loading) setLoading(false)
     }, 4000)
   }, [])
 
@@ -34,6 +37,8 @@ export default function Home() {
     <div className={styles.container}>
       <h1 className={styles.title}>Estação Meteorológica</h1>
       <div className={styles.dataContainer}>
+        {loading ? <LoadingSpinner /> :
+        <>
         <div className={styles.dataPoint}>
           <span className={styles.icon}>🌡️</span>
           <span className={styles.data}>Temperatura: {data.temperature}°C</span>
@@ -47,6 +52,8 @@ export default function Home() {
           <span className={styles.data}>Molhado: {wetValue(data.molhado)}
           </span>
         </div>
+        </>
+        }
       </div>
     </div>
   )
