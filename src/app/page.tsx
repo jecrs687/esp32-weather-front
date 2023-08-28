@@ -1,25 +1,46 @@
+/* eslint-disable @next/next/no-async-client-component */
+'use client';
 import styles from './wheater.module.css'
+import { useEffect, useState } from 'react'
+
+type Data = {
+  temperature: number,
+  humidate: number,
+  molhado: number,
+}
 
 async function getData() {
   const res = await fetch('https://top-redes-40e9a5ec3e40.herokuapp.com/')
   const data = await res.json()
+  console.log("🚀 ~ file: teste.tsx:10 ~ getData ~ data:", data)
   return data
 }
 
-export default async function Home() {
-  const data = await getData()
-
+export default function Home() {
+  const [ data, setData ] = useState({} as Data)
+  
+  useEffect(() => {
+    setInterval(async () => {
+      setData(await getData())
+      console.log("🚀 ~ file: teste.tsx:14 ~ setInterval ~ data:", data)
+    }, 2000)
+  }, [])
+  
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Estação Meteorológica</h1>
       <div className={styles.dataContainer}>
         <div className={styles.dataPoint}>
           <span className={styles.icon}>🌡️</span>
-          <span>Temperatura: <span className={styles.data}>15°C</span></span>
+          <span className={styles.data}>Temperatura: {data.temperature}°C</span>
         </div>
         <div className={styles.dataPoint}>
           <span className={styles.icon}>💧</span>
-          <span>umidade: <span className={styles.data}>15%</span></span>
+          <span className={styles.data}>Humidade: {data.humidate}%</span>
+        </div>
+        <div className={styles.dataPoint}>
+          <span className={styles.icon}>🌧️</span>
+          <span className={styles.data}>Molhado: {data.molhado == 1? "Sim": "Não"}</span>
         </div>
       </div>
     </div>
