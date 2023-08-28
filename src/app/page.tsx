@@ -12,7 +12,6 @@ type Data = {
 async function getData() {
   const res = await fetch('https://top-redes-40e9a5ec3e40.herokuapp.com/')
   const data = await res.json()
-  console.log("🚀 ~ file: teste.tsx:10 ~ getData ~ data:", data)
   return data
 }
 
@@ -22,7 +21,6 @@ export default function Home() {
   useEffect(() => {
     setInterval(async () => {
       setData(await getData())
-      console.log("🚀 ~ file: teste.tsx:14 ~ setInterval ~ data:", data)
     }, 2000)
   }, [])
   
