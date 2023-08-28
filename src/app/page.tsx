@@ -39,19 +39,19 @@ export default function Home() {
       <div className={styles.dataContainer}>
         {loading ? <LoadingSpinner /> :
         <>
-        <div className={styles.dataPoint}>
-          <span className={styles.icon}>🌡️</span>
-          <span className={styles.data}>Temperatura: {data.temperature}°C</span>
-        </div>
-        <div className={styles.dataPoint}>
-          <span className={styles.icon}>💧</span>
-          <span className={styles.data}>Umidade: {data.humidate}%</span>
-        </div>
-        <div className={styles.dataPoint}>
-          <span className={styles.icon}>🌧️</span>
-          <span className={styles.data}>Molhado: {wetValue(data.molhado)}
-          </span>
-        </div>
+          <div className={styles.dataPoint}>
+            <span className={styles.icon}>🌡️</span>
+            <span className={styles.data}>Temperatura: {data.temperature}°C</span>
+          </div>
+          <div className={styles.dataPoint}>
+            <span className={styles.icon}>💧</span>
+            <span className={styles.data}>Umidade: {data.humidate}%</span>
+          </div>
+          <div className={styles.dataPoint}>
+            <span className={styles.icon}>🌧️</span>
+            <span className={styles.data}>Molhado: {wetValue(data.molhado)}
+            </span>
+          </div>
         </>
         }
       </div>
