@@ -21,7 +21,7 @@ export default function Home() {
   useEffect(() => {
     setInterval(async () => {
       setData(await getData())
-    }, 2000)
+    }, 4000)
   }, [])
   
   return (
