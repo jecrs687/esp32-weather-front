@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #e9f4ff;
+    background-image: linear-gradient(to bottom, #8addee , #e5a986 );
     font-family: 'Arial', sans-serif;
     height: 100vh;
 }

@@ -16,9 +16,22 @@ async function getData() {
   return data
 }
 
+function updateGradient(temperature: number){
+  let background = document.getElementById('background')
+  if(!background) return
+  if(temperature < 10){
+    background.style.setProperty('background-image', 'linear-gradient(to bottom, #3ba3f5 0%, #8addee 50%, #e5a986 100%)')
+  } else if(temperature < 20){
+    background.style.setProperty('background-image', 'linear-gradient(to bottom, #8addee 0%, #e5a986 100%)')
+  } else {
+    background.style.setProperty('background-image', 'linear-gradient(to bottom, #8addee 0%, #e5a986 50%, #ed5353 100%)')
+  }
+}
+
 export default function Home() {
   const [ data, setData ] = useState({} as Data)
   const [ loading, setLoading ] = useState(true)
+  if(data) updateGradient(data.temperature)
   
   useEffect(() => {
     setInterval(async () => {
@@ -26,15 +39,9 @@ export default function Home() {
       if(loading) setLoading(false)
     }, 4000)
   }, [])
-
-  function wetValue(value: number){
-    if(value){
-      return value == 1? "Sim": "Não"
-    }
-  }
   
   return (
-    <div className={styles.container}>
+    <div id="background" className={styles.container}>
       <h1 className={styles.title}>Estação Meteorológica</h1>
       <div className={styles.dataContainer}>
         {loading ? <LoadingSpinner /> :
@@ -49,7 +56,7 @@ export default function Home() {
           </div>
           <div className={styles.dataPoint}>
             <span className={styles.icon}>🌧️</span>
-            <span className={styles.data}>Molhado: {wetValue(data.molhado)}
+            <span className={styles.data}>Molhado: {data.molhado ? 'Sim' : 'Não'}
             </span>
           </div>
         </>
