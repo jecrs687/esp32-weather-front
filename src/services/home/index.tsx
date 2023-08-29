@@ -43,16 +43,16 @@ export const HomeComponent = () => {
     if (elRef.current) rain(elRef)
     const data = informations?.[
         !auto
-        ? selectedIndex: 
-        informations.length - 1
+            ? selectedIndex :
+            informations.length - 1
     ]
-    const next = () =>{
-        if(selectedIndex === informations?.length - 1) return;
-        setSelectedIndex((prevState)=> prevState + 1)
+    const next = () => {
+        if (selectedIndex === informations?.length - 1) return;
+        setSelectedIndex((prevState) => prevState + 1)
     }
-    const prev = () =>{
-        if(selectedIndex === 0) return;
-        setSelectedIndex((prevState )=> prevState - 1)
+    const prev = () => {
+        if (selectedIndex === 0) return;
+        setSelectedIndex((prevState) => prevState - 1)
     }
     return (
         <div id="background"
@@ -106,25 +106,33 @@ export const HomeComponent = () => {
                                 </span>
                             </div>
                             <div
-                            style={
-                                {
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    width: "100%"
-                                }
-                            }
+                                className={styles.footer}
                             >
                                 <div
-                                role="button" 
-                                className={
-                                    styles.button
-                                }
-                                onClick={()=>prev()}>   
-                                ⬅️
+                                    className={styles.buttonGroup}
+                                >
+                                <div
+                                    role="button"
+                                    className={
+                                        styles.button
+                                    }
+                                    onClick={() =>
+                                        setSelectedIndex(0)
+                                    }>
+                                    ⏪️
                                 </div>
-                                <div 
-                                 role="button" 
-                                 className={
+                                <div
+                                    role="button"
+                                    className={
+                                        styles.button
+                                    }
+                                    onClick={() => prev()}>
+                                    ⬅️
+                                </div>
+                            </div>
+                            <div
+                                role="button"
+                                className={
                                     styles.button
                                 }
                                 style={{
@@ -133,32 +141,50 @@ export const HomeComponent = () => {
                                     justifyContent: "center",
                                     alignItems: "center",
                                     borderRadius: "5px",
+                                    height: "30px",
                                     boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.75)",
-                                    background: auto ? "green": "red"
+                                    background: auto ? "green" : "red"
                                 }}
-                                onClick={()=>
-                                    setAuto((prevState)=>!prevState)
-                                }> 
-                                 Auto
-                                </div>
-                                <div 
-                                 role="button" 
-                                 className={
-                                    styles.button
+                                onClick={() =>
+                                    setAuto((prevState) => !prevState)
+                                }>
+                                Auto
+                            </div>
+                            <div
+
+                                className={
+                                    styles.buttonGroup
                                 }
-                                onClick={()=>next()}> 
-                                ➡️
+                            >
+                                <div
+                                    role="button"
+                                    className={
+                                        styles.button
+                                    }
+                                    onClick={() => next()}>
+                                    ➡️
+                                </div>
+                                <div
+                                    role="button"
+                                    className={
+                                        styles.button
+                                    }
+                                    onClick={() =>
+                                        setSelectedIndex(informations?.length - 1)
+                                    }>
+                                    ⏩️
                                 </div>
                             </div>
-                        </>
+                        </div>
+                </>
 
                     }
-                </div>
-               <ChartComponent values={[data?.humidate || 0]} />
-                
             </div>
+            <ChartComponent values={[data?.humidate || 0]} />
 
         </div>
+
+        </div >
     )
 }
 

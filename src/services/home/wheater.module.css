@@ -62,6 +62,19 @@
 .button{
     cursor: pointer;
 }
+.buttonGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 @media screen and (max-width: 768px) {
     .dataBox {
         flex-direction: column;
