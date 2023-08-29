@@ -39,7 +39,8 @@
     background-color: #ffffff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     min-width: 200px;
-    min-height: 165px;
+    min-height: 265px;
+    gap: 20px;
 }
 .dataPoint {
     display: flex;

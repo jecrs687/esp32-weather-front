@@ -9,7 +9,7 @@ import { rain } from '@/utils/createRain';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 import { TimerComponent } from '@/components/Timer/timer';
 // @ts-ignore
-import  Thermometer from "react-thermometer-component";
+import  Thermometer from "react-thermometer-chart";
 
 type Data = {
     temperature: number,
@@ -53,14 +53,17 @@ export const HomeComponent = () => {
             className={styles.dataBox}
             >        
 
-                  <Thermometer
-                    theme="light"
-                    value={data?.temperature}
-                    max="45"
-                    size="large"
-                    height="300"
-                    steps="5"
-                />
+            <Thermometer
+                width="150px"
+                height="250px"
+                steps={5}
+                color={
+                    "rgb(" + getBackground(!isLoading ? data.temperature : 30) + ")"
+                }
+                minValue={0}
+                maxValue={45}
+                currentValue={data?.temperature || 20}
+            />
             <div className={styles.dataContainer}>
             <TimerComponent/>
                 {isLoading ? <LoadingSpinner /> :
