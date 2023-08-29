@@ -23,14 +23,15 @@ export default function RootLayout({
        <div
             style={
                 {
-                    position: "absolute",
+                    position: "relative",
                     bottom: "10px",
-                    width: "100%"
+                    width: "100%",
+                    background: "white"
                 }
             }
             >
                 <center>
-                    <small style={{ fontSize: "12px" }}>@2023 - {config?.publicRuntimeConfig?.version} Tech-in</small>
+                    <small style={{ fontSize: "12px", color: "black" }}>@2023 - {config?.publicRuntimeConfig?.version} Tech-in</small>
                 </center>
             </div>
         </body>

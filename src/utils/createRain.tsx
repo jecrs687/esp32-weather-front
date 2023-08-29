@@ -25,5 +25,5 @@ export function rain (elRef:any): any{
       })
       }
     }
-    createRain();
+    // createRain();
     }

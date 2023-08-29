@@ -1,14 +1,15 @@
 'use client';
 import dynamic from 'next/dynamic'
+import React from 'react';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
 
-export const ChartComponent = ({values}:{
+export const ChartComponent = ({ values }: {
   values: Array<number>
 }) => {
   if (typeof window === 'undefined') return null;
-  return (<Chart
+  return  <Chart
     series={values}
     options={{
       chart: {
@@ -57,5 +58,5 @@ export const ChartComponent = ({values}:{
     height={180}
     width={200}
   />
-  )
+  
 }

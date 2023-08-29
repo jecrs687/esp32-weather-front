@@ -5,7 +5,7 @@
     align-items: center;
     background-image: linear-gradient(to bottom, #8addee , #e5a986 );
     font-family: 'Arial', sans-serif;
-    height: 100vh;
+    height: max-content;
 }
 
 .title {
@@ -40,7 +40,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     min-width: 200px;
     min-height: 265px;
-    height: fit-content;
+    height: max-content;
     gap: 10px;
 }
 .dataPoint {
@@ -62,6 +62,12 @@
 @media screen and (max-width: 768px) {
     .dataBox {
         flex-direction: column;
+        height: max-content;
+    }
+    .dataContainer{
+        margin: 50px 0px;
+        height: max-content;
+        min-height: 250px;
     }
 }
     

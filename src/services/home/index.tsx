@@ -29,21 +29,21 @@ async function getData() {
 }
 export const HomeComponent = () => {
 
-    const { data, isLoading } = useSWR('/api/user', {
+    const { data: informations, isLoading } = useSWR('/api/user', {
         refreshInterval: 1000,
         fetcher: getData
     })
 
     const elRef = React.useRef(null)
     if (elRef.current) rain(elRef)
-
+    const data = informations
 
     return (
         <div id="background"
             className={styles.container}
             style={
                 {
-                    background: `rgb(${getBackground(!isLoading ? data.temperature : 30)})`
+                    background: `rgb(${getBackground(data?.temperature || 30)})`
                 }
             }
         >
