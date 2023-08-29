@@ -1,4 +1,9 @@
+
+var created = false;
+
 export function rain (elRef:any): any{
+    if(created) return;
+    created = true;
     var nbDrop = 858; 
     console.log(elRef)
     

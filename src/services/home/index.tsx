@@ -5,6 +5,7 @@ import React, { Ref, useEffect, useState } from 'react'
 import { getBackground } from '@/utils/getBackground';
 import useSWR from 'swr'
 import axios from 'axios'
+import { rain } from '@/utils/createRain';
 type Data = {
     temperature: number,
     humidate: number,
@@ -19,16 +20,31 @@ async function getData() {
     return data
 
 }
-
+const getTime = () => new Date().toLocaleString('pt-BR', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric"
+})
 
 export const HomeComponent = () => {
     const { data, isLoading } = useSWR('/api/user', {
         refreshInterval: 4000,
         fetcher: getData
     })
-    console.log({ data })
-    const elRef = React.useRef(null)
+    const [time, setTime] = useState(getTime())
 
+    const elRef = React.useRef(null)
+    if(elRef.current) rain(elRef)
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(getTime())
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div id="background"
@@ -40,6 +56,10 @@ export const HomeComponent = () => {
             }
         >
             <h1 className={styles.title}>Estação Meteorológica</h1>
+            <h1 className={styles.title}>{
+time
+            }</h1>
+
             <div className={styles.rain} ref={elRef}></div>
             <div className={styles.dataContainer}>
                 {isLoading ? <LoadingSpinner /> :
