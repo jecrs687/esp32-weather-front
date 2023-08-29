@@ -8,8 +8,7 @@ import axios from 'axios'
 import { rain } from '@/utils/createRain';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 import { TimerComponent } from '@/components/Timer/timer';
-import Thermometer from "react-thermometer-chart";
-import GaugeChart from "react-gauge-chart";
+import Thermometer from "react-thermometer-component";
 
 type Data = {
     temperature: number,
@@ -48,23 +47,19 @@ export const HomeComponent = () => {
             <section className={styles.rain} ref={elRef}/>
             <h1 className={styles.title}>Estação Meteorológica</h1>
             <h1 className={styles.title}></h1>
-            <GaugeChart
-                id="gauge-chart2"
-                nrOfLevels={20}
-                percent={(data?.humidate||1)/100}
-                colors={["#B0C4DE", "#00BFFF"]}
-                arcWidth={0.3}
-            />
+
             <div
             className={styles.dataBox}
-            >        <Thermometer
-                width="100px"
-                height="250px"
-                steps={5}
-                minValue={0}
-                maxValue={45}
-                currentValue={(data?.temperature || 20)}
-            />
+            >        
+
+                  <Thermometer
+                    theme="light"
+                    value={data?.temperature}
+                    max="45"
+                    size="large"
+                    height="300"
+                    steps="5"
+                />
             <div className={styles.dataContainer}>
             <TimerComponent/>
                 {isLoading ? <LoadingSpinner /> :
