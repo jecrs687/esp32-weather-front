@@ -18,7 +18,7 @@ export function rain (elRef:any): any{
       var dropLeft = randRange(0,1600);
       var dropTop = randRange(-1000,1400);
       const elementdiv = createElement('div', {className: 'drop', id: 'drop'+i})
-      elRef.current?.append(elementdiv)
+      elRef.current?.appendChild(elementdiv)
       elRef.current?.querySelectorAll('#drop'+i).forEach((el:any)=>{
         el.style.left = dropLeft;
         el.style.top = dropTop;
