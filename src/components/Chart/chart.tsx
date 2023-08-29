@@ -55,7 +55,7 @@ export const ChartComponent = ({values}:{
     }}
     type="radialBar"
     height={350}
-    width={400}
+    width={300}
   />
   )
 }
