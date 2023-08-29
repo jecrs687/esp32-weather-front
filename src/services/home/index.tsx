@@ -28,6 +28,7 @@ async function getData() {
 
 }
 export const HomeComponent = () => {
+
     const { data, isLoading } = useSWR('/api/user', {
         refreshInterval: 1000,
         fetcher: getData
@@ -94,6 +95,7 @@ export const HomeComponent = () => {
                <ChartComponent values={[data?.humidate || 0]} />
                 
             </div>
+
         </div>
     )
 }
