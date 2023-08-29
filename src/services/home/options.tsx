@@ -39,5 +39,5 @@ export const optionsChart ={
   stroke: {
     dashArray: 4
   },
-  labels: ['Humidade'],
+  labels: ['Umidade'],
 }
