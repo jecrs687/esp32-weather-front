@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic'
-import React from 'react';
+import React, { useCallback } from 'react';
 const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
@@ -9,7 +9,8 @@ export const ChartComponent = ({ values }: {
   values: Array<number>
 }) => {
   if (typeof window === 'undefined') return null;
-  return  <Chart
+  const Component =  useCallback(
+    () => <Chart
     series={values}
     options={{
       chart: {
@@ -56,7 +57,8 @@ export const ChartComponent = ({ values }: {
     }}
     type="radialBar"
     height={180}
-    width={200}
-  />
+    width={180}
+  />, [values])
+  return <Component />
   
 }

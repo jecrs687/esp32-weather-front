@@ -17,9 +17,14 @@ export const TimerComponent = ({
     time
 }:{
     time: number
+}={
+    time: Date.now()
 }
 ) => {
-    return (
-        <div className={styles.data}>{firstLetterToUpperCase(getTime(time))} </div>
+    return (<div className={styles.data}>
+            <h4>
+                {firstLetterToUpperCase(getTime(time))} 
+            </h4>
+        </div>
     )
 }

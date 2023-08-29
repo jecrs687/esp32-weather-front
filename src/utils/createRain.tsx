@@ -6,7 +6,6 @@ export function rain (elRef:any): any{
     if(created) return;
     created = true;
     var nbDrop = 858; 
-    console.log(elRef)
     
     function randRange( minNum:number, maxNum:number) {
       return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);

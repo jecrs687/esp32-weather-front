@@ -8,11 +8,13 @@ import axios from 'axios'
 import { rain } from '@/utils/createRain';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 import { TimerComponent } from '@/components/Timer/timer';
-// @ts-ignore
-import Thermometer from "react-thermometer-chart";
 
 import { optionsChart } from './options';
 import { ChartComponent } from '@/components/Chart/chart';
+import dynamic from 'next/dynamic';
+const ThermComponent = dynamic(() => import('@/components/Therm/therm'), { ssr: false });
+
+
 type Data = {
     temperature: number,
     humidate: number,
@@ -38,52 +40,44 @@ export const HomeComponent = () => {
         fetcher: getData
     })
     const [selectedIndex, setSelectedIndex] = useState<number>(0)
-    const [auto, setAuto] = useState<boolean>(false)
+    const [auto, setAuto] = useState<boolean>(true)
     const elRef = React.useRef(null)
     if (elRef.current) rain(elRef)
+    
     const data = informations?.[
-        !auto
-            ? selectedIndex :
-            informations.length - 1
+        auto
+            ?informations.length - 1
+            :selectedIndex         
     ]
     const next = () => {
         if (selectedIndex === informations?.length - 1) return;
+        setAuto(false)
         setSelectedIndex((prevState) => prevState + 1)
     }
+
     const prev = () => {
         if (selectedIndex === 0) return;
+        setAuto(false)
         setSelectedIndex((prevState) => prevState - 1)
     }
+
     return (
         <div id="background"
             className={styles.container}
             style={
-                {
-                    background: `rgb(${getBackground(data?.temperature || 30)})`
-                }
+                {background: `rgb(${getBackground(data?.temperature || 30)})`}
             }
         >
             <section className={styles.rain} ref={elRef} />
             <h1 className={styles.title}>Estação Meteorológica</h1>
-            <h1 className={styles.title}></h1>
 
             <div
                 className={styles.dataBox}
             >
-
-                <Thermometer
-                    width="150px"
-                    height="250px"
-                    steps={5}
-                    color={
-                        "rgb(" + getBackground(!isLoading ? data.temperature : 30) + ")"
-                    }
-                    minValue={0}
-                    maxValue={45}
-                    currentValue={data?.temperature || 20}
-                />
+                <ThermComponent temp={data?.temperature || 0} />
+               
                 <div className={styles.dataContainer}>
-                    <TimerComponent time={data?.timestamp || Date.now()} />
+                    <TimerComponent time={data?.timestamp} />
                     {isLoading ? <LoadingSpinner /> :
                         <>
                             <div className={styles.dataPoint}>
@@ -105,36 +99,21 @@ export const HomeComponent = () => {
                                 <span className={styles.data}>Tremores: {data.shaking}/{data.captures}
                                 </span>
                             </div>
-                            <div
-                                className={styles.footer}
-                            >
+                            <div className={styles.footer}>
+                                <div className={styles.buttonGroup}>
                                 <div
-                                    className={styles.buttonGroup}
-                                >
-                                <div
-                                    role="button"
-                                    className={
-                                        styles.button
-                                    }
-                                    onClick={() =>
-                                        setSelectedIndex(0)
-                                    }>
+                                    className={styles.button}
+                                    onClick={() =>setSelectedIndex(0)}>
                                     ⏪️
                                 </div>
                                 <div
-                                    role="button"
-                                    className={
-                                        styles.button
-                                    }
+                                    className={styles.button}
                                     onClick={() => prev()}>
                                     ⬅️
                                 </div>
                             </div>
                             <div
-                                role="button"
-                                className={
-                                    styles.button
-                                }
+                                className={styles.button}
                                 style={{
                                     padding: "0px 10px",
                                     display: "flex",
@@ -145,33 +124,20 @@ export const HomeComponent = () => {
                                     boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.75)",
                                     background: auto ? "green" : "red"
                                 }}
-                                onClick={() =>
-                                    setAuto((prevState) => !prevState)
-                                }>
+                                onClick={() =>setAuto((prevState) => !prevState)}>
                                 Auto
                             </div>
                             <div
-
-                                className={
-                                    styles.buttonGroup
-                                }
+                                className={styles.buttonGroup}
                             >
                                 <div
-                                    role="button"
-                                    className={
-                                        styles.button
-                                    }
+                                    className={styles.button}
                                     onClick={() => next()}>
                                     ➡️
                                 </div>
                                 <div
-                                    role="button"
-                                    className={
-                                        styles.button
-                                    }
-                                    onClick={() =>
-                                        setSelectedIndex(informations?.length - 1)
-                                    }>
+                                    className={styles.button}
+                                    onClick={() =>setSelectedIndex(informations?.length - 1)}>
                                     ⏩️
                                 </div>
                             </div>
