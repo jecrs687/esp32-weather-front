@@ -22,7 +22,6 @@ async function getData() {
 
 export const HomeComponent = () => {
     const { data, isLoading } = useSWR('/api/user', {
-        initialdata: { temperature: 30, humidate: 30, molhado: 0 },
         refreshInterval: 4000,
         fetcher: getData
     })
