@@ -25,7 +25,7 @@ async function getData() {
 
 export const HomeComponent = () => {
     const { data, isLoading } = useSWR('/api/user', {
-        refreshInterval: 4000,
+        refreshInterval: 1000,
         fetcher: getData
     })
 
@@ -62,6 +62,11 @@ export const HomeComponent = () => {
                         <div className={styles.dataPoint}>
                             <span className={styles.icon}>🌧️</span>
                             <span className={styles.data}>Molhado: {data.molhado ? 'Sim' : 'Não'}
+                            </span>
+                        </div>
+                        <div className={styles.dataPoint}>
+                            <span className={styles.icon}>😖</span>
+                            <span className={styles.data}>Tremores: {data.shaking}/{data.captures}
                             </span>
                         </div>
                     </>
