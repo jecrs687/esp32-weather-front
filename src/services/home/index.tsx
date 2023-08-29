@@ -129,6 +129,11 @@ export const HomeComponent = () => {
                                 }
                                 style={{
                                     padding: "0px 10px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    borderRadius: "5px",
+                                    boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.75)",
                                     background: auto ? "green": "red"
                                 }}
                                 onClick={()=>

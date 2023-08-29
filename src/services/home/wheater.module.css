@@ -60,7 +60,6 @@
 }
 
 .button{
-    background-color: #8addee;
     cursor: pointer;
 }
 @media screen and (max-width: 768px) {
