@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import axios from 'axios'
 import { rain } from '@/utils/createRain';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
+import { TimerComponent } from '@/components/Timer/timer';
 type Data = {
     temperature: number,
     humidate: number,
@@ -21,31 +22,16 @@ async function getData() {
     return data
 
 }
-const getTime = () => new Date().toLocaleString('pt-BR', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric"
-})
 
 export const HomeComponent = () => {
     const { data, isLoading } = useSWR('/api/user', {
         refreshInterval: 4000,
         fetcher: getData
     })
-    const [time, setTime] = useState(getTime())
 
     const elRef = React.useRef(null)
     if(elRef.current) rain(elRef)
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(getTime())
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+
 
     return (
         <div id="background"
@@ -56,13 +42,12 @@ export const HomeComponent = () => {
                 }
             }
         >
+            <section className={styles.rain} ref={elRef}/>
             <h1 className={styles.title}>Estação Meteorológica</h1>
             <h1 className={styles.title}></h1>
 
-            <div className={styles.rain} ref={elRef}></div>
             <div className={styles.dataContainer}>
-            <div className={styles.data}>{firstLetterToUpperCase(time)} </div>
-
+            <TimerComponent/>
                 {isLoading ? <LoadingSpinner /> :
                     <>
                         <div className={styles.dataPoint}>
