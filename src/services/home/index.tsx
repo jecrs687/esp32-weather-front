@@ -112,15 +112,9 @@ export const HomeComponent = () => {
                                 </div>
                             </div>
                             <div
-                                className={styles.button}
+                                className={styles.buttonCenter}
                                 style={{
-                                    padding: "0px 10px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: "5px",
-                                    height: "30px",
-                                    boxShadow: "0px 0px 2px 0px rgba(0,0,0,0.75)",
+                         
                                     background: auto ? "green" : "red"
                                 }}
                                 onClick={() =>setAuto((prevState) => !prevState)}>
@@ -148,7 +142,11 @@ export const HomeComponent = () => {
             <ChartComponent values={[data?.humidate || 0]} />
 
         </div>
-        {/* <section className={styles.rain} ref={elRef} /> */}
+        <section className={styles.rain}
+        style={{
+            zIndex: 1
+        }}
+        ref={elRef} />
         </div >
     )
 }

@@ -6,7 +6,9 @@ export function getBackground(temp: number): string {
     const isCold = temp< 28;
     const backgroundColor = 
     (isCold ? color1: color3).map(
-      (c1,i) => Math.round(c1+(((isCold ?color2[i]: color4[i])-c1)*(temp/45)))
+      (c1,i) => Math.round(c1+(((isCold ?color2[i]: color4[i])-c1)*
+      (temp/(isCold? 30: 42)))
+      )
     ).join(',');
     return backgroundColor;
   }
