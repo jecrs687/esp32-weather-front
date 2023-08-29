@@ -9,7 +9,7 @@ export const ChartComponent = ({ values }: {
   values: Array<number>
 }) => {
   if (typeof window === 'undefined') return null;
-  const Component =  useCallback(
+  const Component =  
     () => <Chart
     series={values}
     options={{
@@ -58,7 +58,7 @@ export const ChartComponent = ({ values }: {
     type="radialBar"
     height={180}
     width={180}
-  />, [values])
+  />
   return <Component />
   
 }
