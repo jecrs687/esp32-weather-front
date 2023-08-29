@@ -54,7 +54,7 @@ export const ChartComponent = ({values}:{
       labels: ['Humidade'],
     }}
     type="radialBar"
-    height={200}
+    height={180}
     width={200}
   />
   )
