@@ -3,7 +3,7 @@ import styles from './timer.module.css';
 import { useEffect, useState } from 'react';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 
-const getTime = () => new Date().toLocaleString('pt-BR', {
+const getTime = (timestamp: number) => new Date(timestamp).toLocaleString('pt-BR', {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
@@ -13,17 +13,13 @@ const getTime = () => new Date().toLocaleString('pt-BR', {
     second: "numeric"
 })
 
-export const TimerComponent = () => {
-    const [time, setTime] = useState(getTime())
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(getTime())
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
-
+export const TimerComponent = ({
+    time
+}:{
+    time: number
+}
+) => {
     return (
-        <div className={styles.data}>{firstLetterToUpperCase(time)} </div>
+        <div className={styles.data}>{firstLetterToUpperCase(getTime(time))} </div>
     )
 }

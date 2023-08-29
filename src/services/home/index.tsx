@@ -17,10 +17,14 @@ type Data = {
     temperature: number,
     humidate: number,
     molhado: number,
+    shaking: number,
+    timestamp: number,
+    captures: number,
+
 }
 const endpoint = "https://top-redes-40e9a5ec3e40.herokuapp.com/"
 async function getData() {
-    const { data } = await axios.request<Data>({
+    const { data } = await axios.request<Array<Data>>({
         url: endpoint,
         method: 'GET',
     })
@@ -33,11 +37,23 @@ export const HomeComponent = () => {
         refreshInterval: 1000,
         fetcher: getData
     })
-
+    const [selectedIndex, setSelectedIndex] = useState<number>(0)
+    const [auto, setAuto] = useState<boolean>(false)
     const elRef = React.useRef(null)
     if (elRef.current) rain(elRef)
-    const data = informations
-
+    const data = informations?.[
+        !auto
+        ? selectedIndex: 
+        informations.length - 1
+    ]
+    const next = () =>{
+        if(selectedIndex === informations?.length - 1) return;
+        setSelectedIndex((prevState)=> prevState + 1)
+    }
+    const prev = () =>{
+        if(selectedIndex === 0) return;
+        setSelectedIndex((prevState )=> prevState - 1)
+    }
     return (
         <div id="background"
             className={styles.container}
@@ -67,7 +83,7 @@ export const HomeComponent = () => {
                     currentValue={data?.temperature || 20}
                 />
                 <div className={styles.dataContainer}>
-                    <TimerComponent />
+                    <TimerComponent time={data?.timestamp || Date.now()} />
                     {isLoading ? <LoadingSpinner /> :
                         <>
                             <div className={styles.dataPoint}>
@@ -89,7 +105,48 @@ export const HomeComponent = () => {
                                 <span className={styles.data}>Tremores: {data.shaking}/{data.captures}
                                 </span>
                             </div>
+                            <div
+                            style={
+                                {
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    width: "100%"
+                                }
+                            }
+                            >
+                                <div
+                                role="button" 
+                                className={
+                                    styles.button
+                                }
+                                onClick={()=>prev()}>   
+                                ⬅️
+                                </div>
+                                <div 
+                                 role="button" 
+                                 className={
+                                    styles.button
+                                }
+                                style={{
+                                    padding: "0px 10px",
+                                    background: auto ? "green": "red"
+                                }}
+                                onClick={()=>
+                                    setAuto((prevState)=>!prevState)
+                                }> 
+                                 Auto
+                                </div>
+                                <div 
+                                 role="button" 
+                                 className={
+                                    styles.button
+                                }
+                                onClick={()=>next()}> 
+                                ➡️
+                                </div>
+                            </div>
                         </>
+
                     }
                 </div>
                <ChartComponent values={[data?.humidate || 0]} />
