@@ -8,7 +8,8 @@ import axios from 'axios'
 import { rain } from '@/utils/createRain';
 import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 import { TimerComponent } from '@/components/Timer/timer';
-import Thermometer from "react-thermometer-component";
+// @ts-ignore
+import  Thermometer from "react-thermometer-component";
 
 type Data = {
     temperature: number,
