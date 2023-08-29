@@ -6,6 +6,7 @@ import { getBackground } from '@/utils/getBackground';
 import useSWR from 'swr'
 import axios from 'axios'
 import { rain } from '@/utils/createRain';
+import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 type Data = {
     temperature: number,
     humidate: number,
@@ -56,18 +57,19 @@ export const HomeComponent = () => {
             }
         >
             <h1 className={styles.title}>Estação Meteorológica</h1>
-            <h1 className={styles.title}>{
-time
-            }</h1>
+            <h1 className={styles.title}></h1>
 
             <div className={styles.rain} ref={elRef}></div>
             <div className={styles.dataContainer}>
+            <div className={styles.data}>{firstLetterToUpperCase(time)} </div>
+
                 {isLoading ? <LoadingSpinner /> :
                     <>
                         <div className={styles.dataPoint}>
                             <span className={styles.icon}>🌡️</span>
                             <span className={styles.data}>Temperatura: {data.temperature}°C</span>
                         </div>
+                   
                         <div className={styles.dataPoint}>
                             <span className={styles.icon}>💧</span>
                             <span className={styles.data}>Umidade: {data.humidate}%</span>
