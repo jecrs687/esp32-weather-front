@@ -53,7 +53,7 @@ export const ChartComponent = ({ values }: {
       stroke: {
         dashArray: 4
       },
-      labels: ['Humidade'],
+      labels: ['Umidade'],
     }}
     type="radialBar"
     height={180}
