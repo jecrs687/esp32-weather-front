@@ -1,5 +1,4 @@
 'use client';
-import dynamic from 'next/dynamic'
 import LoadingSpinner from '@/components/Spinner/spinner';
 import styles from './wheater.module.css'
 import React, { Ref, useEffect, useState } from 'react'
@@ -11,9 +10,9 @@ import { firstLetterToUpperCase } from '@/utils/firtsLetterToUpperCase';
 import { TimerComponent } from '@/components/Timer/timer';
 // @ts-ignore
 import Thermometer from "react-thermometer-chart";
-const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 import { optionsChart } from './options';
+import { ChartComponent } from '@/components/Chart/chart';
 type Data = {
     temperature: number,
     humidate: number,
@@ -92,12 +91,7 @@ export const HomeComponent = () => {
                         </>
                     }
                 </div>
-               {(typeof window !== 'undefined') && <Chart
-                series={[data?.humidate || 20]}
-                options={optionsChart}
-                type="radialBar"
-                height={350}
-                />}
+               <ChartComponent values={[data?.humidate || 0]} />
                 
             </div>
         </div>
