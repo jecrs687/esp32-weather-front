@@ -12,11 +12,12 @@ type Data = {
 }
 const endpoint = "https://top-redes-40e9a5ec3e40.herokuapp.com/"
 async function getData() {
-   return await axios.request<Data>({ 
-    url: endpoint,
-    method: 'GET',
-   })
-  
+    const { data } = await axios.request<Data>({
+        url: endpoint,
+        method: 'GET',
+    })
+    return data
+
 }
 
 
@@ -25,6 +26,7 @@ export const HomeComponent = () => {
         refreshInterval: 4000,
         fetcher: getData
     })
+    console.log({ data })
     const elRef = React.useRef(null)
 
 
@@ -33,7 +35,7 @@ export const HomeComponent = () => {
             className={styles.container}
             style={
                 {
-                    background: `rgb(${getBackground(!isLoading? data.temperature:30)})`
+                    background: `rgb(${getBackground(!isLoading ? data.temperature : 30)})`
                 }
             }
         >
