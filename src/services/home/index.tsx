@@ -68,7 +68,6 @@ export const HomeComponent = () => {
                 {background: `rgb(${getBackground(data?.temperature || 30)})`}
             }
         >
-            <section className={styles.rain} ref={elRef} />
             <h1 className={styles.title}>Estação Meteorológica</h1>
 
             <div
@@ -149,7 +148,7 @@ export const HomeComponent = () => {
             <ChartComponent values={[data?.humidate || 0]} />
 
         </div>
-
+        {/* <section className={styles.rain} ref={elRef} /> */}
         </div >
     )
 }
